@@ -33,6 +33,8 @@ class User
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
+    
+    
 
     /**
      * @var string
@@ -40,6 +42,13 @@ class User
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="login", type="string", length=255)
+     */
+    private $login;
 
     /**
      * @var string
@@ -54,6 +63,14 @@ class User
      * @ORM\Column(name="creationDate", type="datetime")
      */
     private $creationDate;
+    
+    /**
+     * @var Article[]
+     *
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     */
+    
+    private $articles;
 
     /**
      * @var \DateTime
@@ -131,6 +148,14 @@ class User
     public function getName()
     {
         return $this->name;
+    }
+    
+    /*
+     * @return String
+     */
+     public function getNameLogin()
+    {
+        return $this->name.'.'.$this->login;
     }
 
     /**
@@ -246,5 +271,67 @@ class User
     public function getBirthDate()
     {
         return $this->birthDate;
+    }
+    
+    /**
+     * Get Login
+     *
+     * @return \string 
+     */
+    public function getLogin()
+    {
+        return $this->id;
+    }
+    
+    
+    
+  
+
+    /**
+     * Set login
+     *
+     * @param string $login
+     * @return User
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    /**
+     * Add article
+     *
+     * @param \HB\BlogBundle\Entity\Article $article
+     * @return User
+     */
+    public function addArticle(\HB\BlogBundle\Entity\Article $article)
+    {
+        $article->setAuthor($this);
+        $this->articles[]=$article;
+
+        return $this;
+    }
+
+    /**
+     * Remove article
+     *
+     * @param \HB\BlogBundle\Entity\Article $article
+     */
+    public function removeArticle(\HB\BlogBundle\Entity\Article $article)
+    {
+        $this->setAuthor(null) ;
+        $this->article->removeElement($article);
+    }
+
+    /**
+     * Get articles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getArticles()
+    {
+        return $this->articles;
     }
 }
