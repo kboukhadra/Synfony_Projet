@@ -27,6 +27,14 @@ class Article
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+    
+     /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+      * 
+     */
+    private $auteur ;
 
     /**
      * @var string
