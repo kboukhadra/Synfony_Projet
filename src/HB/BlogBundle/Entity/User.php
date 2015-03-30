@@ -12,6 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+    
+      public function __construct(){
+        //valeur par défaut 
+        $this->creationDate= new \DateTime() ;
+}
+    
     /**
      * @var integer
      *

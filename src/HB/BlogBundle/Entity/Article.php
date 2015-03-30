@@ -20,6 +20,13 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    public function __construct(){
+        //valeur par défaut 
+    $this->creationDate= new \DateTime() ;
+    $this->publishDate= new \DateTime() ;
+    $this->enabled =true ;
+}
 
     /**
      * @var string
@@ -34,7 +41,7 @@ class Article
      * @ORM\ManyToOne(targetEntity="User")
       * 
      */
-    private $auteur ;
+    private $author ;
 
     /**
      * @var string
@@ -60,7 +67,7 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="lastEditDate", type="datetime")
+     * @ORM\Column(name="lastEditDate", type="datetime", nullable =true)
      */
     private $lastEditDate;
 
@@ -247,5 +254,28 @@ class Article
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Set auteur
+     *
+     * @param \HB\BlogBundle\Entity\User $author
+     * @return Article
+     */
+    public function setAuthor(\HB\BlogBundle\Entity\User $author = null)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur
+     *
+     * @return \HB\BlogBundle\Entity\User 
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 }

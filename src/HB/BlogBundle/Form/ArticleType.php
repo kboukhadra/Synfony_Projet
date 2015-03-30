@@ -17,11 +17,13 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('creationDate')
+            //->add('creationDate')// ce champ s'initilise avec le constructeur Article
             ->add('publishDate')
-            ->add('lastEditDate')
-            ->add('published')
-            ->add('enabled')
+           // ->add('lastEditDate')
+            ->add('published','checkbox', array('required'=>false))
+            ->add('enabled','checkbox', array('required'=>false))
+            ->add('author','entity',array('class'=>'HBBlogBundle:User',
+                                            'property'=> 'name' ))    
         ;
     }
     
