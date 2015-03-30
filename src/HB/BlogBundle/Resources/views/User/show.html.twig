@@ -39,6 +39,16 @@
             </tr>
         </tbody>
     </table>
+                {% for article in entity.articles %}
+                    {% if loop.first %}<ul> {% endif %}
+                        <li>
+                            
+                            <a href="{{ path('article_show' , {'id': article.id})}}">
+                                {{ article.title}}
+                            </a>
+                                {% if loop.last %} </ul>{% endif %}
+                                    
+                {% endfor %}                    
 
         <ul class="record_actions">
     <li>
