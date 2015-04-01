@@ -22,10 +22,16 @@ class LoadArticleData  extends AbstractFixture implements OrderedFixtureInterfac
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager) {
+        // on récupere le réferences
+        $user=$this->getReference('user1') ;
+        $user1=$this->getReference('user2') ;
+       
         $article = new Article();
         $article->setTitle('titre de mon article');
         $article->setContent('sdfdrfgd,gnndnfgndkjgknkrdjgkkndknfknrkdrkk,rd');
         $article->setPublished(true);
+        // on applique l'auteur à notre article
+        $article->setAuthor($user);
 
         $manager->persist($article);
         
@@ -33,8 +39,10 @@ class LoadArticleData  extends AbstractFixture implements OrderedFixtureInterfac
         $article2->setTitle('2eme titre de mon article');
         $article2->setContent('kjsfhrjfkjkskdfkqsjdkfkks');
         $article2->setPublished(true);
-        $manager->persist($article2);
+        $article2->setAuthor($user1);
         
+        $manager->persist($article2);
+       
         $manager->flush();
          
     }

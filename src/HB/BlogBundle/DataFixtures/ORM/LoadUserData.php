@@ -47,6 +47,9 @@ class LoadUserData  extends AbstractFixture implements OrderedFixtureInterface {
         
         
         $manager->flush();
+        // on stock  dans le repo des fixtures des objets à partager
+         $this->addReference('user1', $user);
+         $this->addReference('user2', $user1);
         
     }
 

@@ -21,6 +21,8 @@ class Article {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    
 
     public function __construct() {
         //valeur par défaut 
@@ -48,6 +50,13 @@ class Article {
      * 
      */
     private $title;
+    
+    /**
+     *
+     * @var type Image
+     * @ORM\OneToOne(targetEntity="Image",cascade="persist")
+     */
+    private $banner;
 
     /**
      * @var User
@@ -57,6 +66,9 @@ class Article {
      *
      */
     private $author;
+    
+    
+    
 
     /**
      * @var string
@@ -281,4 +293,27 @@ class Article {
         return $this->author;
     }
 
+
+    /**
+     * Set banner
+     *
+     * @param \HB\BlogBundle\Entity\Image $banner
+     * @return Article
+     */
+    public function setBanner(\HB\BlogBundle\Entity\Image $banner = null)
+    {
+        $this->banner = $banner;
+
+        return $this;
+    }
+
+    /**
+     * Get banner
+     *
+     * @return \HB\BlogBundle\Entity\Image 
+     */
+    public function getBanner()
+    {
+        return $this->banner;
+    }
 }
