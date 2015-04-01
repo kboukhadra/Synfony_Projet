@@ -2,6 +2,7 @@
 
 namespace HB\BlogBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Contrainte;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="HB\BlogBundle\Entity\ArticleRepository")
  */
-class Article
-{
+class Article {
+
     /**
      * @var integer
      *
@@ -20,33 +21,48 @@ class Article
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-    
-    public function __construct(){
+
+    public function __construct() {
         //valeur par défaut 
-    $this->creationDate= new \DateTime() ;
-    $this->publishDate= new \DateTime() ;
-    $this->enabled =true ;
-}
+        $this->creationDate = new \DateTime();
+        $this->publishDate = new \DateTime();
+        $this->enabled = true;
+    }
 
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * @Contrainte\Length(
+     *      min = "5",
+     *      max = "50",
+     *      minMessage = "Votre nom doit faire au moins  5  caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que  50 caractères"
+     * )
+     * 
+     * @Contrainte\Regex(
+     *  pattern="/^[A-Z]/",
+     *  match=true,
+     *  message="Votre Titre doit commencer par une Majuscule"
+     * )
+     * 
      */
     private $title;
-    
-     /**
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="aricles")
-      * 
+     * 
+     *
      */
-    private $author ;
+    private $author;
 
     /**
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * 
      */
     private $content;
 
@@ -54,6 +70,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
+     * @Contrainte\DateTime()
      */
     private $creationDate;
 
@@ -61,6 +78,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="publishDate", type="datetime")
+     * @Contrainte\DateTime()
      */
     private $publishDate;
 
@@ -68,6 +86,7 @@ class Article
      * @var \DateTime
      *
      * @ORM\Column(name="lastEditDate", type="datetime", nullable =true)
+     * @Contrainte\DateTime()
      */
     private $lastEditDate;
 
@@ -78,7 +97,7 @@ class Article
      */
     private $published;
 
-/**
+    /**
      * @var boolean
      *
      * @ORM\Column(name="enabled", type="boolean")
@@ -90,8 +109,7 @@ class Article
      *
      * @return integer 
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -101,8 +119,7 @@ class Article
      * @param string $title
      * @return Article
      */
-    public function setTitle($title)
-    {
+    public function setTitle($title) {
         $this->title = $title;
 
         return $this;
@@ -113,8 +130,7 @@ class Article
      *
      * @return string 
      */
-    public function getTitle()
-    {
+    public function getTitle() {
         return $this->title;
     }
 
@@ -124,8 +140,7 @@ class Article
      * @param string $content
      * @return Article
      */
-    public function setContent($content)
-    {
+    public function setContent($content) {
         $this->content = $content;
 
         return $this;
@@ -136,8 +151,7 @@ class Article
      *
      * @return string 
      */
-    public function getContent()
-    {
+    public function getContent() {
         return $this->content;
     }
 
@@ -147,8 +161,7 @@ class Article
      * @param \DateTime $creationDate
      * @return Article
      */
-    public function setCreationDate($creationDate)
-    {
+    public function setCreationDate($creationDate) {
         $this->creationDate = $creationDate;
 
         return $this;
@@ -159,8 +172,7 @@ class Article
      *
      * @return \DateTime 
      */
-    public function getCreationDate()
-    {
+    public function getCreationDate() {
         return $this->creationDate;
     }
 
@@ -170,8 +182,7 @@ class Article
      * @param \DateTime $publishDate
      * @return Article
      */
-    public function setPublishDate($publishDate)
-    {
+    public function setPublishDate($publishDate) {
         $this->publishDate = $publishDate;
 
         return $this;
@@ -182,8 +193,7 @@ class Article
      *
      * @return \DateTime 
      */
-    public function getPublishDate()
-    {
+    public function getPublishDate() {
         return $this->publishDate;
     }
 
@@ -193,8 +203,7 @@ class Article
      * @param \DateTime $lastEditDate
      * @return Article
      */
-    public function setLastEditDate($lastEditDate)
-    {
+    public function setLastEditDate($lastEditDate) {
         $this->lastEditDate = $lastEditDate;
 
         return $this;
@@ -205,8 +214,7 @@ class Article
      *
      * @return \DateTime 
      */
-    public function getLastEditDate()
-    {
+    public function getLastEditDate() {
         return $this->lastEditDate;
     }
 
@@ -216,8 +224,7 @@ class Article
      * @param boolean $published
      * @return Article
      */
-    public function setPublished($published)
-    {
+    public function setPublished($published) {
         $this->published = $published;
 
         return $this;
@@ -228,8 +235,7 @@ class Article
      *
      * @return boolean 
      */
-    public function getPublished()
-    {
+    public function getPublished() {
         return $this->published;
     }
 
@@ -239,8 +245,7 @@ class Article
      * @param boolean $enabled
      * @return Article
      */
-    public function setEnabled($enabled)
-    {
+    public function setEnabled($enabled) {
         $this->enabled = $enabled;
 
         return $this;
@@ -251,8 +256,7 @@ class Article
      *
      * @return boolean 
      */
-    public function getEnabled()
-    {
+    public function getEnabled() {
         return $this->enabled;
     }
 
@@ -262,8 +266,7 @@ class Article
      * @param \HB\BlogBundle\Entity\User $author
      * @return Article
      */
-    public function setAuthor(\HB\BlogBundle\Entity\User $author = null)
-    {
+    public function setAuthor(\HB\BlogBundle\Entity\User $author = null) {
         $this->author = $author;
 
         return $this;
@@ -274,8 +277,8 @@ class Article
      *
      * @return \HB\BlogBundle\Entity\User 
      */
-    public function getAuthor()
-    {
+    public function getAuthor() {
         return $this->author;
     }
+
 }

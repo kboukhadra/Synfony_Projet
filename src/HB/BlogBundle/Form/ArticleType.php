@@ -15,12 +15,12 @@ class ArticleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title','text')
             ->add('content')
             //->add('creationDate')// ce champ s'initilise avec le constructeur Article
-            ->add('publishDate')
+            ->add('publishDate',"datetime")
            // ->add('lastEditDate')
-            ->add('published','checkbox', array('required'=>false))
+            ->add('published','checkbox', array('required'=>false),"datetime")
             ->add('enabled','checkbox', array('required'=>false))
             ->add('author','entity',array('class'=>'HBBlogBundle:User',
                                             'property'=> 'name' ))    

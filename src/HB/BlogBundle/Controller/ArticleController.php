@@ -20,9 +20,10 @@ class ArticleController extends Controller
 
     /**
      * Lists all Article entities.
-     *
+     * 
      * @Route("/", name="article")
      * @Method("GET")
+     * l'annotation ci dessous permet de spécifier que l'action est lié directement au template
      * @Template()
      */
     public function indexAction()
@@ -75,8 +76,10 @@ class ArticleController extends Controller
             'action' => $this->generateUrl('article_create'),
             'method' => 'POST',
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
+            // 'attr' permet d'ajouter un attribut dans mon input
+        $form->add('submit', 'submit', array('label' => 'Create',
+            'attr' => array('class' => 'btn btn-primary')
+            ));
 
         return $form;
     }
@@ -165,7 +168,9 @@ class ArticleController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Update',
+            'attr' => array('class' => 'btn btn-primary')
+            ));
 
         return $form;
     }
@@ -243,7 +248,9 @@ class ArticleController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('article_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array('label' => 'Delete',
+                'attr' => array('class' => 'btn btn-primary')
+                ))
             ->getForm()
         ;
     }

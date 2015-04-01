@@ -1,7 +1,7 @@
 <?php
 
 namespace HB\BlogBundle\Entity;
-
+use Symfony\Component\Validator\Constraints as Contrainte;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,6 +31,11 @@ class User
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Contrainte\Email(
+     *             message = "'{{ value }}' n'est pas un email valide.",
+     *              checkMX = true
+     * 
+     * )
      */
     private $email;
     
@@ -40,6 +45,12 @@ class User
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Contrainte\Length(
+     *      min = "3",
+     *      max = "50",
+     *      minMessage = "Votre nom doit faire au moins {{ 3 }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ 50 }} caractères"
+     * )
      */
     private $name;
     
@@ -47,6 +58,13 @@ class User
      * @var string
      *
      * @ORM\Column(name="login", type="string", length=255)
+     * @Contrainte\Length(
+     *      min = "3",
+     *      max = "50",
+     *      minMessage = "Votre nom doit faire au moins {{ 3 }} caractères",
+     *      maxMessage = "Votre nom ne peut pas être plus long que {{ 40 }} caractères"
+     * )
+     * 
      */
     private $login;
 
@@ -54,6 +72,7 @@ class User
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * 
      */
     private $password;
 
@@ -61,13 +80,16 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
-     */
-    private $creationDate;
+     *
+    */
+      private $creationDate;
+     
     
     /**
      * @var Article[]
      *
      * @ORM\OneToMany(targetEntity="Article", mappedBy="author")
+     * 
      */
     
     private $articles;
@@ -76,6 +98,7 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="lastEditDate", type="datetime")
+     * 
      */
     private $lastEditDate;
 
@@ -90,6 +113,7 @@ class User
      * @var \DateTime
      *
      * @ORM\Column(name="birthDate", type="date")
+     * 
      */
     private $birthDate;
 

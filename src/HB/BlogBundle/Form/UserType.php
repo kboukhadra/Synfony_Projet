@@ -15,14 +15,23 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('email', 'repeated', array(
+                   'type'=>'email',
+                    'invalid_message'=> 'les mots de passe doivent correspondre',
+                    'options'=> array('required'=>false),
+                    'first_options'  => array('label' => 'Email'),
+                    'second_options' => array('label' => 'Email (confirmation)'),
+                    ) )
             ->add('name')
             ->add('login')
             ->add('password')
-            ->add('creationDate')
-            ->add('lastEditDate')
+                // j'affiche  les 20 premiere dans BirthDate
+            ->add('creationDate','datetime', array('years'=>  range(date('Y')-20, date('Y'))))
+            ->add('lastEditDate','datetime')
             ->add('enabled')
-            ->add('birthDate')
+                
+                // cela charge les années en 150 ans
+            ->add('birthDate','birthday')
         ;
     }
     
