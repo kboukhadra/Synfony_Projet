@@ -1,0 +1,42 @@
+        body { 
+            padding-top: 70px ;
+            padding-left: 325px ;
+            padding-right: 325px ;
+            align:center ;
+        }
+
+        table {
+            background-color: #FF6633 ;
+            border-collapse: separate;
+            border-spacing: 2px;
+            border-color: gray;
+            border: 1px solid #666;
+            width: auto;
+            margin: 20px 0 20px 0 !important;
+        }
+        input,select,option,textArea{
+            padding:3px;
+            border:2px solid black;
+            background-color:#FFF3F3;
+            border-radius:5px;
+            width:200px;
+            box-shadow:1px 1px 2px #C0C0C0 inset;
+        }
+
+
+        input[type="text"],input[type="email"],input[type="password"] {
+            background-color:#FFF3F3;
+        }
+        li{
+            font-family: serif;
+            color: red;
+            font-size:20px;
+
+        }
+
+        th,td {
+            padding: 2px 4px 2px 4px !important;
+            text-align: center;
+            vertical-align: top;
+
+        }

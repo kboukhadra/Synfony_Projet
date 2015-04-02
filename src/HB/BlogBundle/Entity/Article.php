@@ -53,7 +53,7 @@ class Article {
     
     /**
      *
-     * @var type Image
+     * @var Image
      * @ORM\OneToOne(targetEntity="Image",cascade="persist")
      */
     private $banner;
@@ -316,4 +316,8 @@ class Article {
     {
         return $this->banner;
     }
+    
+    
+    
+    
 }

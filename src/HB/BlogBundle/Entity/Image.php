@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Image
  *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="HB\BlogBundle\Entity\ImageRepository")
+ *@ORM\Table()
+ *@ORM\Entity(repositoryClass="HB\BlogBundle\Entity\ImageRepository")
  */
 class Image
 {
@@ -121,4 +121,8 @@ class Image
     {
         return $this->url;
     }
+    
+    
+ 
+    
 }

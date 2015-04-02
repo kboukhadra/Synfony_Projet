@@ -72,10 +72,10 @@ class ArticleController extends Controller
      */
     private function createCreateForm(Article $entity)
     {
-        $form = $this->createForm(new ArticleType(), $entity, array(
+        $form = $this->createForm(new ArticleType(), $entity/*, array(
             'action' => $this->generateUrl('article_create'),
             'method' => 'POST',
-        ));
+        )*/);
             // 'attr' permet d'ajouter un attribut dans mon input
         $form->add('submit', 'submit', array('label' => 'Create',
             'attr' => array('class' => 'btn btn-primary')

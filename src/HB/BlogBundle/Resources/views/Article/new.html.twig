@@ -2,9 +2,11 @@
 
 {% block content -%}
     <h1>Article creation</h1>
-
+    <form action="{{ path('article_create') }}" method="post" {{form_enctype(form)}}>
+    
+    
     {{ form(form) }}
-
+        </form>
         <ul class="record_actions">
     <li>
         <a href="{{ path('article') }}">

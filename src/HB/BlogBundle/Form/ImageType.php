@@ -18,6 +18,7 @@ class ImageType extends AbstractType
             ->add('title','text')
             ->add('alt','text')
             ->add('url','text')
+             
         ;
     }
     
