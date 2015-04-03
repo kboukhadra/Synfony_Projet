@@ -1,0 +1,17 @@
+{% extends 'HBBlogBundle::layout.html.twig' %}
+{% block body %}
+      <h1>Deconnexion </h1>
+{# empty Twig template #}
+{# src/Acme/SecurityBundle/Resources/views/Security/login.html.twig #}
+{% if error %}
+<div>{{ error.message }}</div>
+{% endif %}
+  <form action="{{ path('login_check') }}" method="post">
+
+<button type="submit">Déconnecter</button>
+</form>
+{% endblock %}
+{#
+Si vous voulez contrôler l'URL vers laquelle l'utilisateur est redirigé en cas de
+succès
+(plus de détails ci-dessous)#}

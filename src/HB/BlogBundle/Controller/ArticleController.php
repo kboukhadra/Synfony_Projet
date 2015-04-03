@@ -30,7 +30,7 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('HBBlogBundle:Article')->findAll();
+        $entities = $em->getRepository('HBBlogBundle:Article:index')->findAll();
 
         return array(
             'entities' => $entities,

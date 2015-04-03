@@ -1,9 +1,10 @@
 # you can read more about security in the related section of the documentation
 # http://symfony.com/doc/current/book/security.html
 security:
+    
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        HB\BlogBundle\Entity\User: plaintext
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
@@ -12,6 +13,11 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
+        my_db:
+            entity:
+                class: HB\BlogBundle\Entity\User
+                property: login
+                        
         in_memory:
             memory:
                 users:
@@ -27,20 +33,17 @@ security:
             security: false
         # the login page has to be accessible for everybody
         demo_login:
-            pattern:  ^/demo/secured/login$
+            pattern:  ^/login$
             security: false
 
         # secures part of the application
-        demo_secured_area:
-            pattern:    ^/demo/secured/
+        secured_area:
+            pattern:    ^/
             # it's important to notice that in this case _demo_security_check and _demo_login
             # are route names and that they are specified in the AcmeDemoBundle
-            form_login:
-                check_path: _demo_security_check
-                login_path: _demo_login
-            logout:
-                path:   _demo_logout
-                target: _demo
+            form_login: ~
+            logout: ~
+               
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"

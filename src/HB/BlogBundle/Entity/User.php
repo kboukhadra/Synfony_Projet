@@ -369,7 +369,7 @@ class User implements UserInterface
     }
 
     public function getSalt() {
-        return 'kjkjkjkjjkjkkk' ;
+        return  null ;
     }
 
     public function getUsername() {
