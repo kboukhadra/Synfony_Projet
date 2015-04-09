@@ -1,0 +1,41 @@
+{% extends 'HBBlogBundle::layoutBlog.html.twig' %}
+
+
+{% block content -%}
+    
+   {# {{dump(articles)}} bonne pratique#}
+    
+    
+    {% for article in articles %}
+        <article>
+            <h3>{{ article.title }}</h3>
+           <p class="article_infos"> Ajouté le {{ article.creationDate|date('d-m-Y')  }} par {{ article.author.name  }}</p>
+           <p> page {{page}} sur 
+            <p class ="article_extrait" >
+               
+               
+                {% if (article.content|length >50) %}
+                    {{article.content|slice(0,50)~'...'}}
+                
+                {% else %}
+                 {{ article.content}}
+               {% endif %}
+                
+            </p>
+            <a href ="">Lire la suite</a>
+        </article>
+       
+      {% endfor  %}  
+      
+      
+      <nav id ="pagination">
+          
+              
+          
+          <a href ="{{lienPagePrecedente }}">Lien Page précédente</a> &nbsp&nbsp&nbsp&nbsp&nbsp
+          <a href ="{{lienPageSuivante }}">Lien Page suivante</a>
+          
+      </nav>
+    
+          {{dump(articles)}}
+{% endblock %}
