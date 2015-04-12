@@ -28,6 +28,7 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
+        //  récupération de doctrine
         $em = $this->getDoctrine()->getManager();
 
         $articles = $em->getRepository('HBBlogBundle:Article:index')->findAll();
