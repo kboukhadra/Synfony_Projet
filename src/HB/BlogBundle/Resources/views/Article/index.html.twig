@@ -19,23 +19,23 @@
             </tr>
         </thead>
         <tbody  class="table">
-        {% for entity in entities %}
+        {% for article in articles %}
             <tr>
-                <td><a href="{{ path('article_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.title }}</td>
-                <td>{{ entity.content }}</td>
-                <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.publishDate %}{{ entity.publishDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.lastEditDate %}{{ entity.lastEditDate|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.published }}</td>
-                <td>{{ entity.enabled }}</td>
+                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
+                <td>{{ article.title }}</td>
+                <td>{{ article.content }}</td>
+                <td>{% if article.creationDate %}{{ article.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if article.publishDate %}{{ article.publishDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if article.lastEditDate %}{{ article.lastEditDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ article.published }}</td>
+                <td>{{ article.enabled }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('article_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('article_show', { 'id': article.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('article_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -49,10 +49,7 @@
             <a href="{{ path('article_new') }}">
                 Create a new entry
             </a>
-                </br>
-                <a href="{{ path('logout') }}">
-                se déconnecter
-            </a>
+                
         </li>
     </ul>
     {% endblock %}

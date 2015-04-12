@@ -1,9 +1,11 @@
 <?php
-namespace HB\BlogBundle\DataFixtures\ORM;
+namespace HB\UserBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use HB\BlogBundle\Entity\User;
+use HB\UserBundle\Entity\User;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,33 +18,38 @@ use HB\BlogBundle\Entity\User;
  *
  * @author hb
  */
-class LoadUserData  extends AbstractFixture implements OrderedFixtureInterface {
+class LoadUserData  extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
     
+    private $container ;
     public function load(ObjectManager $manager) {
-        $user = new User();
-        $user->setName('khalid') ;
+        $userManager = $this->container->get('fos_user_.user_manager');
+        $user = $userManager->createUser();
+       
+       // $user->setName('fixturz') ;
         $user->setEmail('kaul128@free.fr');
-        $user->setPassword('25555');
-        $user->setBirthDate(new \DateTime('now'));
-        $user->setCreationDate(new \DateTime('now'));
-        $user->setLogin('kaul128');
+        $user->setPlainPassword('25555');
+        //$user->setBirthDate(new \DateTime('now'));
+       // $user->setCreationDate(new \DateTime('now'));
+        $user->setUserName('kaul128');
         $user->setEnabled(true);
-        $user->setLastEditDate(new \DateTime('now'));
-     
-        $manager->persist($user);
+        //$user->setLastEditDate(new \DateTime('now'));
         
+        $userManager->updateUser($user);
+        //$manager->persist($user);
         
-        $user1 = new User();
-        $user1->setName('Marc') ;
+       //////////////////////////////////////////////////////////////////////////////
+        
+        $user1 = $userManager->createUser();
+        $user1->setUsername('khabliixifkvkjdfjv') ;
+       // $user1->setName('Marc') ;
         $user1->setEmail('Marc_br@free.fr');
-        $user1->setPassword('sdh_552sndnb');
-        $user1->setBirthDate(new \DateTime('now'));
-        $user1->setCreationDate(new \DateTime('now'));
-        $user1->setLogin('marco_14_mtp');
+        $user1->setPlainPassword('sdh_552sndnb');
+       // $user1->setBirthDate(new \DateTime('now'));
+        //$user1->setCreationDate(new \DateTime('now'));
         $user1->setEnabled(true);
-        $user1->setLastEditDate(new \DateTime('now'));
-     
-        $manager->persist($user1);
+        //$user1->setLastEditDate(new \DateTime('now'));
+        $userManager->updateUser($user1);
+        //$manager->persist($user1);
         
         
         
@@ -55,6 +62,10 @@ class LoadUserData  extends AbstractFixture implements OrderedFixtureInterface {
 
     public function getOrder() {
         return 1;
+    }
+
+    public function setContainer(ContainerInterface $container = null) {
+        $this->container=$container ;
     }
 
 //put your code here

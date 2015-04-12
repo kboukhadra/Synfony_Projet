@@ -1,0 +1,21 @@
+{% extends 'HBBlogBundle::layout.html.twig' %}
+
+{% block content -%}
+
+<h4>{{ article.title }}</h4>
+<hr>
+Publié le {{ article.publishDate|date('Y-m-d H:i:s') }} par {{ article.author.username }}
+<br/>
+<br/>
+<p>
+    {{ article.content }}
+</p>
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('blog_index_page', { 'page': app.session.get('page') }) }}">
+               Revenir à la liste
+            </a>
+        </li>
+</ul>
+{% endblock %}

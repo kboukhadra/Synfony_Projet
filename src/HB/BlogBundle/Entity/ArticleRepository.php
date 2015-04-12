@@ -11,37 +11,22 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class ArticleRepository extends EntityRepository {
-    private $limit = 2;
-    /**
-     * 
-     * @param type $page
-     * @return type
-     */
-    public function getHomePageArticles($page = 1) {
-      
-        // offset c est la 1er entrée numero offset 
-        $offset = $page*($this->limit);
 
+    public function getHomePageArticles($limit =null) {
+
+        /*cette methode retourne tous les articles qui on pubished=true
+        et enabled=true en décroissant sur les publishDate et pas de limite
+         *
+         */
         return $this->findBy(
                         // tous les critère sont a true
-                        array('published' => true, 'enabled' => true), array('publishDate' => 'desc'), $this->limit, $offset
+                        array('published' => true, 'enabled' => true),
+                        //du plus
+                        array('publishDate' => 'desc'),
+                        $limit
         );
     }
 
-    /**
-     * 
-     * renvoie le nombre de page correspondant à la limite
-     */
-    public function getCountPage() {
-        
-        $nbArticles = $this->createQueryBuilder('a')
-                ->where('a.published = 1 ')
-                ->andWhere('a.enabled = 1')
-                ->select('count(a)')
-                ->getQuery() // déclenche la requete
-                ->getSingleScalarResult() ;// renvoie le nombre
-        
-        return (int)ceil($nbArticles/$this->limit) ;
-    }
+    
 
 }

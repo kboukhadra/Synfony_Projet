@@ -25,25 +25,46 @@ class LoadArticleData  extends AbstractFixture implements OrderedFixtureInterfac
         // on récupere le réferences
         $user=$this->getReference('user1') ;
         $user1=$this->getReference('user2') ;
-       
-        $article = new Article();
-        $article->setTitle('titre de mon article');
-        $article->setContent('sdfdrfgd,gnndnfgndkjgknkrdjgkkndknfknrkdrkk,rd');
-        $article->setPublished(true);
-        // on applique l'auteur à notre article
-        $article->setAuthor($user);
 
-        $manager->persist($article);
-        
+
+
+             for ($j = 0; $j < 50; $j++) {
+                 $string = "";
+                 $chaine ="abcd ef ghijkl mnopq rstuvw" ;
+                 $chaine1 = "ab c de f gh ijk lm n pqr stuvwxyABC D E F G H I J LMNOPQRSTU VWXYZ";
+                 srand((double)microtime()*1000000);
+                 for($i=0; $i< 15 ; $i++) {
+                     $string .= $chaine[rand()%strlen($chaine)];
+                 }
+                 $article2 = new Article();
+                 $article2->setTitle($string);
+
+                 $content="";
+                 for($i=0; $i< 200 ; $i++) {
+                     $content .= $chaine1[rand()%strlen($chaine1)];
+                 }
+                 $article2->setContent($content);
+                 $article2->setPublished(true);
+                 $article2->setEnabled(true);
+                 $article2->setAuthor($user1);
+                 $manager->persist($article2);
+
+             }
+
+
+
+       /* for($i=0 ; $i< 50 ; $i++){
         $article2 = new Article();
-        $article2->setTitle('2eme titre de mon article');
+        $article2->setTitle('2eme titre de mon article'.$i);
         $article2->setContent('kjsfhrjfkjkskdfkqsjdkfkks');
         $article2->setPublished(true);
+        $article2->setEnabled(true);
         $article2->setAuthor($user1);
-        
         $manager->persist($article2);
-       
+        }*/
         $manager->flush();
+        
+        
          
     }
 /**

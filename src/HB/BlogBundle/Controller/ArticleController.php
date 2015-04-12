@@ -30,10 +30,10 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('HBBlogBundle:Article:index')->findAll();
+        $articles = $em->getRepository('HBBlogBundle:Article:index')->findAll();
 
         return array(
-            'entities' => $entities,
+            'articles' => $articles,
         );
     }
     /**
@@ -45,20 +45,20 @@ class ArticleController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Article();
-        $form = $this->createCreateForm($entity);
+        $article = new Article();
+        $form = $this->createCreateForm(article);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($article);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('article_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('article_show', array('id' => $article->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'article' => $article,
             'form'   => $form->createView(),
         );
     }
@@ -66,13 +66,13 @@ class ArticleController extends Controller
     /**
      * Creates a form to create a Article entity.
      *
-     * @param Article $entity The entity
+     * @param Article $article The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Article $entity)
+    private function createCreateForm(Article $article)
     {
-        $form = $this->createForm(new ArticleType(), $entity/*, array(
+        $form = $this->createForm(new ArticleType(), $article/*, array(
             'action' => $this->generateUrl('article_create'),
             'method' => 'POST',
         )*/);
@@ -93,11 +93,11 @@ class ArticleController extends Controller
      */
     public function newAction()
     {
-        $entity = new Article();
-        $form   = $this->createCreateForm($entity);
+        $article = new Article();
+        $form   = $this->createCreateForm($article);
 
         return array(
-            'entity' => $entity,
+            'article' => $article,
             'form'   => $form->createView(),
         );
     }
@@ -113,22 +113,52 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('HBBlogBundle:Article')->find($id);
+        $article = $em->getRepository('HBBlogBundle:Article')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+        if (!$article) {
+            throw $this->createNotFoundException('Unable to find Article article.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'article'      => $article,
             'delete_form' => $deleteForm->createView(),
         );
     }
 
+
+
     /**
-     * Displays a form to edit an existing Article entity.
+     * Finds and displays a Article entity.
+     *
+     * @Route("/voir/{id}", name="article_show_user")
+     * @Method("GET")
+     * @Template()
+     */
+    public function show_userAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $article = $em->getRepository('HBBlogBundle:Article')->find($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('Unable to find Article article.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'article'      => $article,
+
+        );
+    }
+
+
+
+
+    /**
+     * Displays a form to edit an existing Article article.
      *
      * @Route("/{id}/edit", name="article_edit")
      * @Method("GET")
@@ -138,33 +168,33 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('HBBlogBundle:Article')->find($id);
+        $article = $em->getRepository('HBBlogBundle:Article')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+        if (!$article) {
+            throw $this->createNotFoundException('Unable to find Article article.');
         }
 
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($article);
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'article'      => $article,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-    * Creates a form to edit a Article entity.
+    * Creates a form to edit a Article article.
     *
-    * @param Article $entity The entity
+    * @param Article $article The article
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Article $entity)
+    private function createEditForm(Article $article)
     {
-        $form = $this->createForm(new ArticleType(), $entity, array(
-            'action' => $this->generateUrl('article_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new ArticleType(), $article, array(
+            'action' => $this->generateUrl('article_update', array('id' => $article->getId())),
             'method' => 'PUT',
         ));
 
@@ -185,17 +215,17 @@ class ArticleController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('HBBlogBundle:Article')->find($id);
+        $article = $em->getRepository('HBBlogBundle:Article')->find($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Article entity.');
+        if (!$article) {
+            throw $this->createNotFoundException('Unable to find Article article.');
         }
         
         //gérer la datetime de derniere edition
-        $entity->setLastEditDate(new \DateTime()) ;
+        $article->setLastEditDate(new \DateTime()) ;
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($article);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -205,13 +235,13 @@ class ArticleController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
+            'article'      => $article,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
     /**
-     * Deletes a Article entity.
+     * Deletes a Article article.
      *
      * @Route("/{id}", name="article_delete")
      * @Method("DELETE")
@@ -223,13 +253,13 @@ class ArticleController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('HBBlogBundle:Article')->find($id);
+            $article = $em->getRepository('HBBlogBundle:Article')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Article entity.');
+            if (!$article) {
+                throw $this->createNotFoundException('Unable to find Article article.');
             }
 
-            $em->remove($entity);
+            $em->remove($article);
             $em->flush();
         }
 
@@ -237,9 +267,9 @@ class ArticleController extends Controller
     }
 
     /**
-     * Creates a form to delete a Article entity by id.
+     * Creates a form to delete a Article article by id.
      *
-     * @param mixed $id The entity id
+     * @param mixed $id The article id
      *
      * @return \Symfony\Component\Form\Form The form
      */

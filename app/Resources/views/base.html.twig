@@ -12,8 +12,10 @@
 </head>
 <body>
     {% block menu %}
+        {# on va inclure le manu#}
         {% include ":blocs:menu.html.twig"%}
     {% endblock %}
+    {#on surcharge ce block body#}
 {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 <script src ="http://code.jquery.com/jquery.js"></script>

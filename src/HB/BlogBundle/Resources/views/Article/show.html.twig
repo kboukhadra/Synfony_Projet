@@ -7,45 +7,45 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ entity.id }}</td>
+                <td>{{ article.id }}</td>
             </tr>
             <tr>
                 <th>Title</th>
-                <td>{{ entity.title }}</td>
+                <td>{{ article.title }}</td>
             </tr>
             <tr>
                 <th>Content</th>
-                <td>{{ entity.content }}</td>
+                <td>{{ article.content }}</td>
             </tr>
             <tr>
                 <th>Creationdate</th>
-                <td>{{ entity.creationDate|date('Y-m-d H:i:s') }}</td>
+                <td>{{ article.creationDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Publishdate</th>
-                <td>{{ entity.publishDate|date('Y-m-d H:i:s') }}</td>
+                <td>{{ article.publishDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Lasteditdate</th>
-                <td>{{ entity.lastEditDate|date('Y-m-d H:i:s') }}</td>
+                <td>{{ article.lastEditDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Published</th>
-                <td>{{ entity.published }}</td>
+                <td>{{ article.published }}</td>
             </tr>
             <tr>
                 <th>Enabled</th>
-                <td>{{ entity.enabled }}</td>
+                <td>{{ article.enabled }}</td>
             </tr>
             
             <tr>
                 <th>Nom de l'auteur</th>
-                <td>{{ entity.author.name }}</td>
+                <td>{{ article.author.username }}</td>
             </tr>
             
             <tr>
-                <th>auteur détails</th>
-                <td>{{ entity.author.nameLogin }}</td>
+                <th>Email auteur</th>
+                <td>{{ article.author.email }}</td>
             </tr
         </tbody>
     </table>
@@ -57,7 +57,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ path('article_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('article_edit', { 'id': article.id }) }}">
             Edit
         </a>
     </li>
