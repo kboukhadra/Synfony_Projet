@@ -17,8 +17,10 @@
     {% endblock %}
     {#on surcharge ce block body#}
 {% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+
 <script src ="http://code.jquery.com/jquery.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script src ="{{asset('js/bootstrap.min.js')}}"></script>
+{% block javascripts %}{% endblock %}
 </body>
 </html>

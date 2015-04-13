@@ -19,7 +19,8 @@ use HB\UserBundle\Entity\User;
  * @author hb
  */
 class LoadUserData  extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
-    
+  // on peut pas faire un héritage multiple onc on va implémenter  ContainerAwareInterface 
+    // on pouura généré setContainer
     private $container ;
     public function load(ObjectManager $manager) {
         $userManager = $this->container->get('fos_user_.user_manager');

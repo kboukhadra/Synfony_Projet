@@ -49,8 +49,15 @@ class ArticleController extends Controller
         $article = new Article();
         $form = $this->createCreateForm(article);
         $form->handleRequest($request);
-
-        if ($form->isValid()) {
+        
+        if($entity->getSlug()==""){
+            //hb_blog.slugger est le nom du service
+            $slugger =$this->get('hb_blog.slugger');
+            $slug= $slugger->getSlug((int)$entity->getId(). ' '.$entity->getTitle());
+            $entity->setSlug($slug);
+        }
+            // si le formulaire est valide on insere en base
+        if ($form->isValid()) {                                                                           
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();

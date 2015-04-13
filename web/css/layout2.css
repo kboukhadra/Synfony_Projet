@@ -40,3 +40,10 @@
             vertical-align: top;
 
         }
+        .article{
+            border-top-style: double;
+    border-right-style: solid;
+    border-bottom-style: double;
+    border-left-style: solid;
+            
+        }

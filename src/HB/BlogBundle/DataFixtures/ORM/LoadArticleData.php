@@ -1,7 +1,10 @@
 <?php
 namespace HB\BlogBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use HB\BlogBundle\Entity\Article;
 
@@ -16,37 +19,27 @@ use HB\BlogBundle\Entity\Article;
  *
  * @author hb
  */
-class LoadArticleData  extends AbstractFixture implements OrderedFixtureInterface {
+class LoadArticleData  extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface {
     /**
      * 
      * @param ObjectManager $manager
      */
+     private $container ;
     public function load(ObjectManager $manager) {
         // on récupere le réferences
         $user=$this->getReference('user1') ;
         $user1=$this->getReference('user2') ;
+            
+            $slugger =$this->container->get('hb_blog.slugger');
 
-
-
-             for ($j = 0; $j < 50; $j++) {
-                 $string = "";
-                 $chaine ="abcd ef ghijkl mnopq rstuvw" ;
-                 $chaine1 = "ab c de f gh ijk lm n pqr stuvwxyABC D E F G H I J LMNOPQRSTU VWXYZ";
-                 srand((double)microtime()*1000000);
-                 for($i=0; $i< 15 ; $i++) {
-                     $string .= $chaine[rand()%strlen($chaine)];
-                 }
-                 $article2 = new Article();
-                 $article2->setTitle($string);
-
-                 $content="";
-                 for($i=0; $i< 200 ; $i++) {
-                     $content .= $chaine1[rand()%strlen($chaine1)];
-                 }
-                 $article2->setContent($content);
+             for ($i = 0; $i < 50; $i++) {
+                $article2 = new Article();
+                 $article2->setTitle('titre '.$i);
+                 $article2->setContent('dfjjdf kdfjkvjk  djkfkjvjkd kkdqfkkjvdjk');
                  $article2->setPublished(true);
                  $article2->setEnabled(true);
                  $article2->setAuthor($user1);
+                 $article2->setSlug($slugger->getSlug($i."---".$article2->getTitle()));
                  $manager->persist($article2);
 
              }
@@ -76,5 +69,7 @@ class LoadArticleData  extends AbstractFixture implements OrderedFixtureInterfac
         return 2;
     }
 
-//put your code here
+    public function setContainer(ContainerInterface $container = null) {
+        $this->container=$container ;
+    }
 }

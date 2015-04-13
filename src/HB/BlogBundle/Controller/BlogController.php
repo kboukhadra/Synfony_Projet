@@ -43,6 +43,21 @@ class BlogController extends Controller {
            
         );
     }
+    /**
+     * Finds and displays a Article entity.
+     *
+     * @Route("blog/{slug}", name="article_slug")
+     * @Template()
+     */
+     public function showAction($slug="")
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $repo = $em->getRepository('HBBlogBundle:Article');
+            // on récupere le repository de article
+        $article= $repo->findOneBy((array("slug"=>$slug)));
+        return array('article'=>$article);
+    }
 
    
 

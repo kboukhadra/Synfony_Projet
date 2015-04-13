@@ -18,8 +18,9 @@
                     {{ article.content }}
                 {% endif %}
             </p>
+           
         </article>
-<p>ma session est {{ app.session.get('page') }}</p>
+
     {% endfor %}
 
     {# display navigation #}
@@ -30,4 +31,9 @@
     {#{{ dump(pagination) }}#}
 
 
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src ="{{ asset('bundles/hbblog/js/homepage.js') }}" ><script>
+    
 {% endblock %}

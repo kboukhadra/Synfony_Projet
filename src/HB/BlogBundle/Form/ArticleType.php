@@ -17,6 +17,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('title','text')
             ->add('content')
+            ->add('slug', 'text', array('required'=>false))
             //->add('creationDate')// ce champ s'initilise avec le constructeur Article
             ->add('publishDate',"datetime")
            // ->add('lastEditDate')
