@@ -31,7 +31,7 @@ class ArticleController extends Controller
         //  récupération de doctrine
         $em = $this->getDoctrine()->getManager();
 
-        $articles = $em->getRepository('HBBlogBundle:Article:index')->findAll();
+        $articles = $em->getRepository('HBBlogBundle:Article')->findAll();
 
         return array(
             'articles' => $articles,
@@ -50,11 +50,11 @@ class ArticleController extends Controller
         $form = $this->createCreateForm(article);
         $form->handleRequest($request);
         
-        if($entity->getSlug()==""){
+        if( $article->getSlug()==""){
             //hb_blog.slugger est le nom du service
             $slugger =$this->get('hb_blog.slugger');
-            $slug= $slugger->getSlug((int)$entity->getId(). ' '.$entity->getTitle());
-            $entity->setSlug($slug);
+            $slug= $slugger->getSlug((int)$article->getId(). ' '.$article->getTitle());
+            $article->setSlug($slug);
         }
             // si le formulaire est valide on insere en base
         if ($form->isValid()) {                                                                           
